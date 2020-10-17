@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import TopicContext from '../../contexts/topic-contexts';
 import { Config } from '../../util/config';
-import { TaskData } from '../../util/topic-types';
+import { TaskData } from '../../util/types/data-types';
 
 const columns = [
   {

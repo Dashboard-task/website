@@ -1,6 +1,6 @@
 interface TimeStamps {
-    createdAt: string;
-    updatedAt: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 /**
