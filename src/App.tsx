@@ -1,4 +1,3 @@
-import 'antd/dist/antd.css';
 import { MainRouter } from './navigation/route';
 import React from 'react';
 import TopicContextProvider from './components/context-providers/topic-context-provider';
