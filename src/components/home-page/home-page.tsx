@@ -1,43 +1,28 @@
-import { Row, Layout, Col } from 'antd';
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Col, Container, Row } from 'react-bootstrap';
 import { TaskComponent } from '../task/task';
 import { TopicComponent } from '../topic/topic';
-
-const { Content, Sider } = Layout;
 
 /**
  * Page d'accueil.
  */
 export const HomePage: React.FC = () => {
     return (
-        <Row justify="center">
-            <Layout>
-                <Col>
-                    {/* <Col span={3} style={{ backgroundColor: '#fadb14' }}> */}
-                    <Sider theme='light'>
-                        <Route path="/">
+        <div>
+            <Container style={{ marginTop: '1%' }}>
+                <Row>
+                    <Col md={3}>
+                        <div className='topic-component'>
                             <TopicComponent />
-                        </Route>
-                    </Sider>
-                </Col>
-                <Col>
-                    {/* <Col span={18} style={{ backgroundColor: 'blue' }}> */}
-                    <Content>
-                        <Route path="/">
+                        </div>
+                    </Col>
+                    <Col md={9}>
+                        <div className='task-component'>
                             <TaskComponent />
-                        </Route>
-                    </Content>
-                </Col>
-                <Col>
-                    {/* <Col span={3} style={{ backgroundColor: 'green' }}> */}
-                    <Sider theme='light'>
-                        <Route path="/">
-                            Du texte.
-                    </Route>
-                    </Sider>
-                </Col>
-            </Layout>
-        </Row>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
     )
 }
