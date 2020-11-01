@@ -1,7 +1,7 @@
 import { Table } from 'react-bootstrap';
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-import TopicContext from '../../contexts/topic-contexts';
+import ThemeContext from '../../contexts/theme-contexts';
 import { Config } from '../../util/config';
 import { TaskData } from '../../util/types/data-types';
 
@@ -10,17 +10,17 @@ import { TaskData } from '../../util/types/data-types';
  * Toutes les tâches d'un thèmes y seront stoquées.
  */
 export const TaskComponent: React.FC = () => {
-  const topicContexte = useContext(TopicContext);
+  const themeContexte = useContext(ThemeContext);
   const [tasks, setTasks] = useState<TaskData[]>([]);
 
   // Récupère la liste des thèmes.
   useEffect(() => {
-    if (topicContexte.topic != null) {
-      axios.get(`${Config.API_URL}/topics/${topicContexte.topic.id}`)
+    if (themeContexte.theme != null) {
+      axios.get(`${Config.API_URL}/topics/${themeContexte.theme.id}`)
         .then((res) => setTasks(res.data.topic.tasks))
         .catch(console.log);
     }
-  }, [topicContexte.topic]); // Si un topic arrive, ça reset (normalement)
+  }, [themeContexte.theme]); // Si un topic arrive, ça reset (normalement)
 
   return (
     <Table variant="white" size="sm" responsive>
@@ -43,12 +43,8 @@ export const TaskComponent: React.FC = () => {
             <td>{task.description}</td>
             <td>{task.state}</td>
             <td>{task.priority}</td>
-            <td>{task.createdAt}</td>
-            <td>{new Intl.DateTimeFormat("fr-Fr", {
-              year: "numeric",
-              month: "long",
-              day: "2-digit"
-            }).format(task.deadline)}</td>
+            <td>{new Date(task.createdAt).toLocaleString()}</td>
+            <td>{new Date(task.deadline).toLocaleString()}</td>
           </tr>
         ))}
       </tbody>
