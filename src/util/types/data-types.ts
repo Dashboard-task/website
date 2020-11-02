@@ -1,20 +1,22 @@
+
 interface TimeStamps {
     createdAt: Date;
     updatedAt: Date;
 }
 
-/**
- * Topic data interface.
- */
-export interface TopicData extends TimeStamps {
+// Values used for post an theme
+export interface AddThemeFormValues {
+    name: string;
+}
+
+
+// Theme data interface.
+export interface ThemeData extends TimeStamps {
     id: string;
     name: string;
     tasks: TaskData[];
 }
-
-/**
- * Topic data interface.
- */
+// Topic data interface.
 export interface TaskData extends TimeStamps {
     id: string;
     title: string;

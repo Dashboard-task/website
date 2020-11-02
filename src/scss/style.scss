@@ -1,0 +1,119 @@
+/*******************************************
+    Fichier SCSS avec tout mon css perso.
+********************************************/
+
+@import './theme.scss';
+@import './variables';
+
+/*
+    CSS Global
+*/
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient($blue, #036140);
+    background-repeat: no-repeat;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+
+/* Solid border */
+
+hr.solid {
+    border-top: 1px solid #bbb;
+}
+
+html {
+    height: 100%;
+}
+
+
+/*
+    Component
+*/
+
+.footer {
+    color: white;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+}
+
+.list-group-icon {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.list-group-item {
+    margin: 1%;
+    border-radius: 5% 5% 5% 5%;
+}
+
+.list-group-perso {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #073c5e;
+    border-radius: 2% 2% 2% 2%;
+    background-color: rgba(7, 60, 94, 0.25);
+    padding: 1%;
+}
+
+.task-component {
+    margin-top: 1%;
+    border: 3px solid #073c5e;
+    border-radius: 15px;
+    background-color: #036140;
+    padding: 5%;
+}
+
+.theme-component {
+    margin-top: 1%;
+    border: 3px solid #073c5e;
+    border-radius: 15px;
+    background-color: #036140;
+    padding: 5%;
+}
+
+
+/*
+    Autres
+*/
+
+.button-primary {}
+
+.margin-low {
+    margin: 1%;
+}
+
+.margin-bottom-low {
+    margin-bottom: 1%;
+}
+
+.margin-bottom-medium {
+    margin-bottom: 3%;
+}
+
+.margin-bottom-high {
+    margin-bottom: 5%;
+}
+
+.margin-top-low {
+    margin-top: 1%;
+}
+
+.margin-top-medium {
+    margin-top: 3%;
+}
+
+.margin-top-high {
+    margin-top: 5%;
+}
