@@ -1,7 +1,5 @@
-import axios from 'axios';
 import React from 'react';
 import * as yup from 'yup';
-import { Config } from '../../util/config';
 import { Formik } from 'formik';
 import { Button, Form, ListGroup } from 'react-bootstrap';
 import { Check, Trash } from 'react-bootstrap-icons';
@@ -9,7 +7,7 @@ import { AddThemeFormValues, ThemeData } from '../../util/types/data-types';
 
 interface ListThemeProps {
   themes: ThemeData[];
-  addTopic: (theme: AddThemeFormValues) => void;
+  onAddTheme: (theme: AddThemeFormValues) => void;
   onDeleteTheme: (theme: ThemeData) => void;
   onSelectTheme: (theme: ThemeData) => void;
 }
@@ -33,7 +31,7 @@ export const ThemeComponent: React.FC<ListThemeProps> = (props) => {
                 {theme.name}
               </ListGroup.Item>
               <div className='list-group-icon'>
-                <Trash color='white' onClick={() => props.onDeleteTheme(theme)}/>
+                <Trash color='white' onClick={() => props.onDeleteTheme(theme)} />
               </div>
             </div>
           ))
@@ -44,7 +42,7 @@ export const ThemeComponent: React.FC<ListThemeProps> = (props) => {
         <Formik
           initialValues={{ name: '' }}
           validationSchema={AddThemeValidationSchema}
-          onSubmit={values => props.addTopic(values)}
+          onSubmit={values => props.onAddTheme(values)}
         >
           {({ handleSubmit, handleChange, values, touched, errors }) => (
             <Form noValidate onSubmit={handleSubmit}>
