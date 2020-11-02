@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Modal } from "react-bootstrap";
-import { Formik } from 'formik';
+import { Button, Modal } from "react-bootstrap";
 
 export const ModalTask: React.FC = () => {
     const [show, setShow] = useState(false);

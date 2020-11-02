@@ -1,26 +1,29 @@
 import { Table } from 'react-bootstrap';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
-import ThemeContext from '../../contexts/theme-contexts';
+import React, { useEffect, useState } from 'react';
 import { Config } from '../../util/config';
-import { TaskData } from '../../util/types/data-types';
+import { TaskData, ThemeData } from '../../util/types/data-types';
 
+interface ListTaskProps {  
+  theme: ThemeData;
+}
 /**
  * Composant des tâches. 
  * Toutes les tâches d'un thèmes y seront stoquées.
  */
-export const TaskComponent: React.FC = () => {
-  const themeContexte = useContext(ThemeContext);
+export const TaskComponent: React.FC<ListTaskProps> = (props) => {
+  // const themeContexte = useContext(ThemeContext);
   const [tasks, setTasks] = useState<TaskData[]>([]);
 
   // Récupère la liste des thèmes.
   useEffect(() => {
-    if (themeContexte.theme != null) {
-      axios.get(`${Config.API_URL}/topics/${themeContexte.theme.id}`)
+    if (props.theme != null) {
+      console.log(`${Config.API_URL}/topics/${props.theme.id}`);
+      axios.get(`${Config.API_URL}/topics/${props.theme.id}`)
         .then((res) => setTasks(res.data.topic.tasks))
         .catch(console.log);
     }
-  }, [themeContexte.theme]); // Si un topic arrive, ça reset (normalement)
+  }, [props.theme]); // Si un thème arrive, ça reset (normalement)
 
   return (
     <Table variant="white" size="sm" responsive>
@@ -37,7 +40,7 @@ export const TaskComponent: React.FC = () => {
       </thead>
       <tbody>
         {tasks.map((task, index) => (
-          <tr>
+          <tr key={index}>
             <td>{index + 1}</td>
             <td>{task.title}</td>
             <td>{task.description}</td>

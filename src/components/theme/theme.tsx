@@ -7,9 +7,11 @@ import { Button, Form, ListGroup } from 'react-bootstrap';
 import { Check, Trash } from 'react-bootstrap-icons';
 import { AddThemeFormValues, ThemeData } from '../../util/types/data-types';
 
-export interface ListThemeProps {
+interface ListThemeProps {
   themes: ThemeData[];
   addTopic: (theme: AddThemeFormValues) => void;
+  onDeleteTheme: (theme: ThemeData) => void;
+  onSelectTheme: (theme: ThemeData) => void;
 }
 
 /**
@@ -21,29 +23,17 @@ export const ThemeComponent: React.FC<ListThemeProps> = (props) => {
     name: yup.string().required('Tu dois donner un nom à ton thème.').typeError('Nom invalide')
   });
 
-  const handleDeleteTheme = async (topic: ThemeData) => {
-    // TODO APPEL DE LA VERIFICATION AVANT DE KICK UN TRUC
-    console.log(topic.id);
-
-    try {
-      await axios.delete(`${Config.API_URL}/topics/${topic.id}`);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   return (
     <>
       <div className='margin-bottom-high'>
         <ListGroup>
           {props.themes.map((theme, index) => (
             <div key={index} className='list-group-perso'>
-              <ListGroup.Item className='list-group-item'>
+              <ListGroup.Item className='list-group-item' onClick={() => props.onSelectTheme(theme)}>
                 {theme.name}
               </ListGroup.Item>
-              {/* style={{ display: 'block', textAlign: 'center' }} */}
               <div className='list-group-icon'>
-                <Trash color='white' onClick={() => handleDeleteTheme(theme)} />
+                <Trash color='white' onClick={() => props.onDeleteTheme(theme)}/>
               </div>
             </div>
           ))

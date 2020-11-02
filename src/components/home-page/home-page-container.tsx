@@ -11,6 +11,7 @@ import { ThemeComponent } from '../theme/theme';
  */
 export const HomePage: React.FC = () => {
     const [themes, setThemes] = useState<ThemeData[]>([]); // Hook méthode GET list themes. 
+    const [selectedTheme, setSelectedTheme] = useState<ThemeData>(null);
 
     /**
       * Method : GET all topics
@@ -21,13 +22,27 @@ export const HomePage: React.FC = () => {
 
 
     const handleCreateTheme = async (theme: AddThemeFormValues) => {
-        console.log(theme);
-        // TODO Check si le thème est pas déjà dans la liste.
         try {
             await axios.post(`${Config.API_URL}/topics`, { name: theme.name });
+            const resp = await axios.get(`${Config.API_URL}/topics`);
+            setThemes(resp.data.topics);
         } catch (err) {
             console.log(err);
         }
+    }
+
+    const handleDeleteTheme = async (topic: ThemeData) => {
+        try {
+            await axios.delete(`${Config.API_URL}/topics/${topic.id}`);
+            const resp = await axios.get(`${Config.API_URL}/topics`);
+            setThemes(resp.data.topics);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    const handleSelectedTheme = (theme: ThemeData) => {
+        setSelectedTheme(theme);
     }
 
     return (
@@ -36,12 +51,12 @@ export const HomePage: React.FC = () => {
                 <Row>
                     <Col md={3}>
                         <div className='theme-component'>
-                            <ThemeComponent themes={themes} addTopic={handleCreateTheme}/>
+                            <ThemeComponent themes={themes} addTopic={handleCreateTheme} onDeleteTheme={handleDeleteTheme} onSelectTheme={handleSelectedTheme} />
                         </div>
                     </Col>
                     <Col md={9}>
                         <div className='task-component'>
-                            <TaskComponent />
+                            <TaskComponent theme={selectedTheme} />
                         </div>
                     </Col>
                 </Row>
