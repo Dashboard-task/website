@@ -9,6 +9,13 @@ export interface AddThemeFormValues {
     name: string;
 }
 
+export interface UpdateTaskFormData {
+    title: string,
+    description: string;
+    state: State;
+    priority: Priority;
+    deadline: Date;
+}
 
 // Theme data interface.
 export interface ThemeData extends TimeStamps {
