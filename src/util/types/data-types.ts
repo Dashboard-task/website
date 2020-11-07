@@ -9,6 +9,14 @@ export interface AddThemeFormValues {
     name: string;
 }
 
+export interface PostTaskFormData {
+    title: string,
+    description: string;
+    state: State;
+    priority: Priority;
+    deadline: Date;
+}
+
 export interface UpdateTaskFormData {
     title: string,
     description: string;
@@ -23,6 +31,7 @@ export interface ThemeData extends TimeStamps {
     name: string;
     tasks: TaskData[];
 }
+
 // Topic data interface.
 export interface TaskData extends TimeStamps {
     id: string;
@@ -33,16 +42,17 @@ export interface TaskData extends TimeStamps {
     deadline: Date;
 }
 
-/**
- * Priority enumeration.
- */
-export enum Priority {
-    LOW = 0, MEDIUM = 1, HIGH = 2,
+export interface ErrorData {
+    header: string;
+    body: string;
 }
 
-/**
- * State enumeration.
- */
+// Priority enumeration.
+export enum Priority {
+    LOW = 'Faible', MEDIUM = 'Moyen', HIGH = 'Haute',
+}
+
+// State enumeration.
 export enum State {
-    WAITING = 0, IN_PROGRESS = 1, FINISHED = 2
+    WAITING = 'En attente', IN_PROGRESS = 'En cours', FINISHED = 'Terminée'
 }

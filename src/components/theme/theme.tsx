@@ -25,17 +25,17 @@ export const ThemeComponent: React.FC<ListThemeProps> = (props) => {
     <>
       <div className='margin-bottom-high'>
         <ListGroup>
+          <ListGroup.Item>Liste des thèmes</ListGroup.Item>
           {props.themes.map((theme, index) => (
             <div key={index} className='list-group-perso'>
-              <ListGroup.Item className='list-group-item' onClick={() => props.onSelectTheme(theme)}>
+              <p className='list-group-item' onClick={() => props.onSelectTheme(theme)}>
                 {theme.name}
-              </ListGroup.Item>
+              </p>
               <div className='list-group-icon'>
                 <Trash color='white' onClick={() => props.onDeleteTheme(theme)} />
               </div>
             </div>
-          ))
-          }
+          ))}
         </ListGroup >
       </div>
       <div className='margin-low'>
@@ -56,7 +56,7 @@ export const ThemeComponent: React.FC<ListThemeProps> = (props) => {
                     onChange={handleChange}
                     isInvalid={touched.name && errors.name != null} />
                   <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
-                  <Button className='button-primary' type="submit">
+                  <Button variant='primary' type="submit">
                     <Check />
                   </Button>
                 </div>
