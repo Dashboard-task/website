@@ -1,7 +1,5 @@
-import axios from 'axios';
 import React from 'react';
 import * as yup from 'yup';
-import { Config } from '../../util/config';
 import { Formik } from 'formik';
 import { Button, Form, ListGroup } from 'react-bootstrap';
 import { Check, Trash } from 'react-bootstrap-icons';
@@ -9,7 +7,7 @@ import { AddThemeFormValues, ThemeData } from '../../util/types/data-types';
 
 interface ListThemeProps {
   themes: ThemeData[];
-  addTopic: (theme: AddThemeFormValues) => void;
+  onAddTheme: (theme: AddThemeFormValues) => void;
   onDeleteTheme: (theme: ThemeData) => void;
   onSelectTheme: (theme: ThemeData) => void;
 }
@@ -27,24 +25,24 @@ export const ThemeComponent: React.FC<ListThemeProps> = (props) => {
     <>
       <div className='margin-bottom-high'>
         <ListGroup>
+          <ListGroup.Item>Liste des thèmes</ListGroup.Item>
           {props.themes.map((theme, index) => (
             <div key={index} className='list-group-perso'>
-              <ListGroup.Item className='list-group-item' onClick={() => props.onSelectTheme(theme)}>
+              <p className='list-group-item' onClick={() => props.onSelectTheme(theme)}>
                 {theme.name}
-              </ListGroup.Item>
+              </p>
               <div className='list-group-icon'>
-                <Trash color='white' onClick={() => props.onDeleteTheme(theme)}/>
+                <Trash color='white' onClick={() => props.onDeleteTheme(theme)} />
               </div>
             </div>
-          ))
-          }
+          ))}
         </ListGroup >
       </div>
       <div className='margin-low'>
         <Formik
           initialValues={{ name: '' }}
           validationSchema={AddThemeValidationSchema}
-          onSubmit={values => props.addTopic(values)}
+          onSubmit={values => props.onAddTheme(values)}
         >
           {({ handleSubmit, handleChange, values, touched, errors }) => (
             <Form noValidate onSubmit={handleSubmit}>
@@ -58,7 +56,7 @@ export const ThemeComponent: React.FC<ListThemeProps> = (props) => {
                     onChange={handleChange}
                     isInvalid={touched.name && errors.name != null} />
                   <Form.Control.Feedback type="invalid">{errors.name}</Form.Control.Feedback>
-                  <Button className='button-primary' type="submit">
+                  <Button variant='primary' type="submit">
                     <Check />
                   </Button>
                 </div>
